@@ -14,14 +14,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.blanktheevil.koindemo.ui.theme.KoinDemoTheme
 import com.blanktheevil.koindemo.viewmodel.KoinDemoViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
+import org.koin.core.parameter.parametersOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             KoinDemoTheme {
-                val viewModel by viewModel<KoinDemoViewModel>()
+                val viewModel = koinViewModel<KoinDemoViewModel>()
                 val uiState by viewModel.uiState.collectAsState()
 
                 Surface(
@@ -29,7 +31,13 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     uiState?.let{
-                        Greeting(name = it)
+
+
+                        val demoObject: DemoClass = koinInject(
+                            parameters = { parametersOf(1, it) }
+                        )
+
+                        Greeting(name = demoObject.name)
                     }
                 }
             }

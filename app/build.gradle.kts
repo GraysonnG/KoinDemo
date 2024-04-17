@@ -51,18 +51,20 @@ android {
 }
 
 dependencies {
-
+    // Koin
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
     implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
-
+    // Moshi / Retrofit
     implementation(libs.moshi)
     implementation(libs.moshi.adapters)
     ksp(libs.moshi.kotlin.codegen)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
 
+    // Android & Compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -71,6 +73,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

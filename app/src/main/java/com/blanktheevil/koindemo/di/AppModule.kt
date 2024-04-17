@@ -1,5 +1,6 @@
 package com.blanktheevil.koindemo.di
 
+import com.blanktheevil.koindemo.DemoClass
 import com.blanktheevil.koindemo.MyRepository
 import com.blanktheevil.koindemo.MyRepositoryImpl
 import com.blanktheevil.koindemo.api.MyApi
@@ -38,6 +39,9 @@ val appModule = module {
         )
     }
 
+    factory<DemoClass> { params ->
+        DemoClass(params[0], params[1])
+    }
 
     viewModelOf(::KoinDemoViewModel)
 }
